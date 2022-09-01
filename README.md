@@ -31,6 +31,7 @@ VCheckSDK.start(
         verificationToken: verifToken,
         verificationScheme: verifScheme,
         languageCode: "en",
+        environment: VCheckEnvironment.DEV,
         partnerEndCallback: partnerEndCallback());
 ```
 

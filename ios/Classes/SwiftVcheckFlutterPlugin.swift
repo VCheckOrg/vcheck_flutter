@@ -10,6 +10,8 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
     
     private var verifScheme: VerificationSchemeType? = nil
 
+    private var environment: VCheckEnvironment? = VCheckEnvironment.DEV
+
     private var languageCode: String? = nil
     
     private var showPartnerLogo: Bool? = false
@@ -28,7 +30,7 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
 
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "com.vcheck.vcheck_flutter", binaryMessenger: registrar.messenger())
-        let instance = SwiftVcheckFlutterTestPlugin()
+        let instance = SwiftVcheckFlutterPlugin()
         instance.channel = channel
         registrar.addMethodCallDelegate(instance, channel: instance.channel!)
         registrar.addApplicationDelegate(instance)
@@ -50,6 +52,8 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
         self.verificationToken = arguments["verifToken"] as? String
         
         self.verifScheme = convertStrToVerifScheme(str: arguments["verifScheme"] as? String)
+
+        self.environment = convertStrToEnvironment(str: arguments["environment"] as? String)
 
         self.languageCode = arguments["languageCode"] as? String
         
@@ -78,18 +82,20 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
             .verificationToken(token: self.verificationToken!)
             .verificationType(type: self.verifScheme!)
             .languageCode(langCode: self.languageCode!)
-            .showPartnerLogo(show: Bool)
-            .showCloseSDKButton(show: Bool)
-         .partnerEndCallback(callback: {
-             self.onVCheckSDKFlowFinish()
-         })
-         .start(partnerAppRW: getOwnRootWindow()!,
-                 partnerAppVC: (UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController)!,
-                 replaceRootVC: false)
+            .environment(env: self.environment!)
+            .showPartnerLogo(show: self.showPartnerLogo!)
+            .showCloseSDKButton(show: self.showCloseSDKButton!)
+            .partnerEndCallback(callback: {
+                self.onVCheckSDKFlowFinish()
+            })
+            .start(partnerAppRW: getOwnRootWindow()!,
+                    partnerAppVC: (UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController)!,
+                    replaceRootVC: false)
     }
     
     private func onVCheckSDKFlowFinish() {
         
+        //!
         // UIApplication.shared.delegate?.window??.rootViewController?.dismiss(animated: true, completion: {})
         // UIApplication.shared.delegate?.window??.rootViewController?.navigationController?.popViewController(animated: true)
 
@@ -144,10 +150,20 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
         let list = [
             VerificationSchemeType.FULL_CHECK,
             VerificationSchemeType.LIVENESS_CHALLENGE_ONLY,
-            VerificationSchemeType.DOCUMENT_UPLOAD_ONLY,
+            VerificationSchemeType.DOCUMENT_UPLOAD_ONLY
         ]
         return list.first { $0.description.lowercased() == str }
-      }
+    }
+
+    private func convertStrToEnvironment(str: String?) -> VCheckEnvironment? {
+        // let list = [
+        //     VCheckEnvironment.DEV,
+        //     VCheckEnvironment.PARTNER
+        // ]
+        // return list.first { $0.description.lowercased() == str }
+        //TODO: fix - add .despription ext to VCheckEnvironment
+        return VCheckEnvironment.DEV
+    }
 
     public func applicationWillTerminate(_ application: UIApplication) {
         debugPrint("applicationWillTerminate")

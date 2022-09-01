@@ -12,6 +12,7 @@ class VCheckSDK {
       required VerificationSchemeType verificationScheme,
       required String languageCode,
       required Function partnerEndCallback,
+      VCheckEnvironment? environment,
       bool? showPartnerLogo,
       bool? showCloseSDKButton,
       String? colorBackgroundTertiary,
@@ -138,3 +139,5 @@ enum VerificationSchemeType {
   DOCUMENT_UPLOAD_ONLY, // = «document_upload_only»
   LIVENESS_CHALLENGE_ONLY // = «liveness_challenge_only»
 }
+
+enum VCheckEnvironment { DEV, PARTNER }

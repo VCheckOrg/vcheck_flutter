@@ -88,6 +88,7 @@ class _MyAppState extends State<MyApp> {
         verificationToken: VERIFICATION_TOKEN,
         verificationScheme: verificationScheme,
         languageCode: "en",
+        environment: VCheckEnvironment.DEV,
         partnerEndCallback: partnerEndCallback());
 
     if (!mounted) return;

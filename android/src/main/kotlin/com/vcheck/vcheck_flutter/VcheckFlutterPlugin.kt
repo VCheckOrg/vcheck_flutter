@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import androidx.annotation.NonNull
 import com.vcheck.sdk.core.VCheckSDK
+import com.vcheck.sdk.core.domain.VCheckEnvironment
 import com.vcheck.sdk.core.domain.VerificationSchemeType
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -20,6 +21,8 @@ class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   private var verificationToken: String? = null
 
   private var verifScheme: VerificationSchemeType? = null
+
+  private var environment: VCheckEnvironment? = VCheckEnvironment.DEV
 
   private var languageCode: String? = null
 
@@ -63,6 +66,8 @@ class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
       verifScheme = convertStrToVerifScheme(call.argument("verifScheme"))
 
+      environment = convertStrToEnvironment(call.argument("environment"))
+
       languageCode = call.argument("languageCode")
 
       showPartnerLogo = call.argument("showPartnerLogo")
@@ -98,8 +103,9 @@ class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
       .verificationToken(verificationToken!!)
       .verificationType(verifScheme!!)
       .languageCode(languageCode!!)
-      // .showPartnerLogo(showPartnerLogo)
-      // .showCloseSDKButton(showCloseSDKButton)
+      .environment(environment!!)
+      .showPartnerLogo(showPartnerLogo!!)
+      .showCloseSDKButton(showCloseSDKButton!!)
       .partnerEndCallback {
         onVCheckSDKFlowFinish()
       }
@@ -150,6 +156,12 @@ class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
   private fun convertStrToVerifScheme(str: String?): VerificationSchemeType? {
     return VerificationSchemeType.values().firstOrNull {
+      it.name.lowercase() == str
+    }
+  }
+
+  private fun convertStrToEnvironment(str: String?): VCheckEnvironment? {
+    return VCheckEnvironment.values().firstOrNull {
       it.name.lowercase() == str
     }
   }
