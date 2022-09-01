@@ -17,7 +17,7 @@ The plugin in the package itself uses dev dependencies of [Android](https://jitp
 #### Add dependency 
 
 ```
-vcheck_flutter: ^1.0.0
+vcheck_flutter: ^1.0.1
 ```
 
 #### Start SDK flow
@@ -31,7 +31,6 @@ VCheckSDK.start(
         verificationToken: verifToken,
         verificationScheme: verifScheme,
         languageCode: "en",
-        environment: VCheckEnvironment.DEV,
         partnerEndCallback: partnerEndCallback());
 ```
 
