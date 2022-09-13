@@ -3,7 +3,7 @@
 [VCheck](https://vycheck.com/) is online remote verification service for fast and secure customer access to your services.
 
 This package represents VCheck SDK for Flutter(iOS, Android).
-The plugin in the package itself uses dev dependencies of [Android](https://jitpack.io/#VCheckOrg/vcheck_android_sdk_test) and [iOS](https://cocoapods.org/pods/VCheckSDKTest) native SDKs channeled to Flutter SDK.
+The native plugins in the package itself use dependencies of [Android](https://jitpack.io/#VCheckOrg/vcheck_android_sdk_test) and [iOS](https://cocoapods.org/pods/VCheckSDKTest) SDKs channeled to Flutter SDK.
 
 ## Features
 
@@ -17,7 +17,7 @@ The plugin in the package itself uses dev dependencies of [Android](https://jitp
 #### Add dependency 
 
 ```
-vcheck_flutter: ^1.0.6
+vcheck_flutter: ^1.0.7
 ```
 
 #### Start SDK flow
