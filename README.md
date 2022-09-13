@@ -17,7 +17,7 @@ The plugin in the package itself uses dev dependencies of [Android](https://jitp
 #### Add dependency 
 
 ```
-vcheck_flutter: ^1.0.3
+vcheck_flutter: ^1.0.4
 ```
 
 #### Start SDK flow

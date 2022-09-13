@@ -1,3 +1,7 @@
+## 1.0.4
+
+* Native plugins update
+
 ## 1.0.3
 
 * Native plugins update
