@@ -2,6 +2,7 @@ package com.vcheck.vcheck_flutter
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import androidx.annotation.NonNull
 import com.vcheck.sdk.core.VCheckSDK
 import com.vcheck.sdk.core.domain.VCheckEnvironment
@@ -15,6 +16,8 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 
 class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
+  private val TAG = "VCheck_Flutter_Android"
+
   private lateinit var context: Context
   private lateinit var activity: Activity
 
@@ -22,7 +25,7 @@ class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
   private var verifScheme: VerificationSchemeType? = null
 
-  private var environment: VCheckEnvironment? = VCheckEnvironment.DEV
+  private var environment: VCheckEnvironment? = null
 
   private var languageCode: String? = null
 
@@ -82,7 +85,17 @@ class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
       colorActionButtons = call.argument("colorActionButtons")
       colorIcons = call.argument("colorIcons")
 
-      result.success("VCheck: Android SDK start() method called")
+      if (verifScheme != null) {
+          Log.i(TAG, "Using ${verifScheme!!.name.uppercase()} verification scheme")
+      }
+      if (environment != null) {
+          Log.i(TAG, "Using ${environment!!.name.uppercase()} environment")
+      }
+      if (environment == VCheckEnvironment.DEV) {
+          Log.i(TAG, "Warning: SDK environment is not set or default; using DEV environment by default")
+      }
+
+      result.success("$TAG: Android SDK start() method called")
 
       launchSDK(activity)
   }
@@ -154,14 +167,14 @@ class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
     //Stub
   }
 
-  private fun convertStrToVerifScheme(str: String?): VerificationSchemeType? {
-    return VerificationSchemeType.values().firstOrNull {
+  private fun convertStrToVerifScheme(str: String?): VerificationSchemeType {
+    return VerificationSchemeType.values().first {
       it.name.lowercase() == str
     }
   }
 
-  private fun convertStrToEnvironment(str: String?): VCheckEnvironment? {
-    return VCheckEnvironment.values().firstOrNull {
+  private fun convertStrToEnvironment(str: String?): VCheckEnvironment {
+    return VCheckEnvironment.values().first {
       it.name.lowercase() == str
     }
   }

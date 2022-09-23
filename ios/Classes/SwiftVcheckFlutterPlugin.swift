@@ -10,7 +10,7 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
     
     private var verifScheme: VerificationSchemeType? = nil
 
-    private var environment: VCheckEnvironment? = VCheckEnvironment.DEV
+    private var environment: VCheckEnvironment? = nil
 
     private var languageCode: String? = nil
     
@@ -51,9 +51,9 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
         
         self.verificationToken = arguments["verifToken"] as? String
         
-        self.verifScheme = convertStrToVerifScheme(str: arguments["verifScheme"] as? String)
+        self.verifScheme = convertStrToVerifScheme(str: (arguments["verifScheme"] as? String)?.lowercased())
 
-        self.environment = convertStrToEnvironment(str: arguments["environment"] as? String)
+        self.environment = convertStrToEnvironment(str: (arguments["environment"] as? String)?.lowercased())
 
         self.languageCode = arguments["languageCode"] as? String
         
@@ -69,7 +69,17 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
         self.colorActionButtons = arguments["colorActionButtons"] as? String
         self.colorIcons = arguments["colorIcons"] as? String
 
-        result("VCheck: iOS SDK start() method called")
+        if let vs = self.verifScheme {
+            print("VCheck_Flutter_iOS : Using \(String(describing: vs.description.uppercased())) verification scheme")
+        }
+        if let env = self.environment {
+            print("VCheck_Flutter_iOS : Using \(String(describing: env.description.uppercased())) environment")
+        }
+        if (environment == VCheckEnvironment.DEV) {
+            print("VCheck_Flutter_iOS - Warning: SDK environment is not set or default; using DEV environment by default")
+        }
+
+        result("VCheck_Flutter_iOS : iOS SDK start() method called")
         
         self.launchSDK()
     }
@@ -95,10 +105,6 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
     
     private func onVCheckSDKFlowFinish() {
         
-        //!
-        // UIApplication.shared.delegate?.window??.rootViewController?.dismiss(animated: true, completion: {})
-        // UIApplication.shared.delegate?.window??.rootViewController?.navigationController?.popViewController(animated: true)
-
         DispatchQueue.main.async {
             self.channel!.invokeMethod("onFinish", arguments: nil, result: {(r:Any?) -> () in
                 print(r.debugDescription);
@@ -156,13 +162,11 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
     }
 
     private func convertStrToEnvironment(str: String?) -> VCheckEnvironment? {
-        // let list = [
-        //     VCheckEnvironment.DEV,
-        //     VCheckEnvironment.PARTNER
-        // ]
-        // return list.first { $0.description.lowercased() == str }
-        //TODO: fix - add .despription ext to VCheckEnvironment
-        return VCheckEnvironment.DEV
+        let list = [
+            VCheckEnvironment.DEV,
+            VCheckEnvironment.PARTNER
+        ]
+        return list.first { $0.description.lowercased() == str }
     }
 
     public func applicationWillTerminate(_ application: UIApplication) {
