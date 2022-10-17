@@ -17,7 +17,7 @@ The native plugins in the package itself use dependencies of [Android](https://j
 #### Add dependency 
 
 ```
-vcheck_flutter: ^1.0.15
+vcheck_flutter: ^1.0.16
 ```
 
 #### Start SDK flow
@@ -41,7 +41,7 @@ VCheckSDK.start(
 | Property | Type | Description |
 | ----------- | ----------- | ----------- |
 | verificationToken | String | Valid token of recently created VCheck Verification |
-| verifScheme | VerificationSchemeType | Verification scheme type |
+| verificationScheme | VerificationSchemeType | Verification scheme type |
 | languageCode | String | 2-letter language code (Ex.: "en" ; implementation's default is "en") |
 | environment | VCheckEnvironment | VCheck service environment (dev/partner) |
 | partnerEndCallback | Function | Callback function which triggers on verification process and SDK flow finish |
@@ -49,15 +49,15 @@ VCheckSDK.start(
 
 #### Optional properties for verification session's logic and UI customization
 
-| Property | Type |
-| ----------- | ----------- |
-| colorBackgroundPrimary | String? | 
-| colorBackgroundSecondary | String? |
-| colorBackgroundTertiary | String? |
-| colorActionButtons | String? |
-| colorTextPrimary | String? |
-| colorTextSecondary | String? |
-| colorBorders | String? |
-| colorIcons | String? |
-| showCloseSDKButton | bool? |
-| showPartnerLogo | bool? |
+| Property | Type | Description |
+| ----------- | ----------- | ----------- |
+| colorBackgroundPrimary | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
+| colorBackgroundSecondary | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
+| colorBackgroundTertiary | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
+| colorActionButtons | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
+| colorTextPrimary | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
+| colorTextSecondary | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
+| colorBorders | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
+| colorIcons | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
+| showCloseSDKButton | bool? | Should 'Return to Partner' button be shown |
+| showPartnerLogo | bool? | Should Partner logo be shown |
