@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'vcheck_flutter'
-  s.version          = '1.0.17'
+  s.version          = '1.0.18'
   s.summary          = 'A new flutter plugin project.'
   s.description      = <<-DESC
 A new flutter plugin project.
