@@ -17,7 +17,7 @@ The native plugins in the package itself use dependencies of [Android](https://j
 #### Add dependency 
 
 ```
-vcheck_flutter: ^1.0.19
+vcheck_flutter: ^1.0.20
 ```
 
 #### Start SDK flow
