@@ -1,3 +1,7 @@
+## 1.0.22
+
+* Native plugins update
+
 ## 1.0.21
 
 * Native plugins update (Android)
