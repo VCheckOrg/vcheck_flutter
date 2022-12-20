@@ -1,6 +1,30 @@
+## 1.0.29
+
+* Native plugins update
+
+## 1.0.28
+
+* Native plugins update
+
+## 1.0.27
+
+* Native plugins update
+
+## 1.0.26
+
+* Native plugins update
+
+## 1.0.25
+
+* Native plugins update
+
+## 1.0.24
+
+* Native plugins update (Android)
+
 ## 1.0.23
 
-* Android configs update
+* Native plugins update (Android)
 
 ## 1.0.22
 
