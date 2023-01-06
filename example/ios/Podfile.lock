@@ -2,10 +2,10 @@ PODS:
   - Alamofire (5.6.4)
   - Flutter (1.0.0)
   - lottie-ios (4.0.1)
-  - vcheck_flutter (1.0.31):
+  - vcheck_flutter (1.0.32):
     - Flutter
     - VCheckSDK
-  - VCheckSDK (1.0.65):
+  - VCheckSDK (1.0.66):
     - Alamofire
     - lottie-ios
 
@@ -29,8 +29,8 @@ SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   lottie-ios: 54d22edf55b839f0929cabbfe609c9aa548b1145
-  vcheck_flutter: 2974a8dd3b3264feb83f729a7150066f343cab0a
-  VCheckSDK: fd074801f84fe1998ba9ab11ddc8e934b029f6c7
+  vcheck_flutter: e4996d0281001a978baac2d1d4a341fafe51343d
+  VCheckSDK: 411b5220d8322a6a7c99dbc00ae86cba7b70cce9
 
 PODFILE CHECKSUM: 775997f741c536251164e3eacf6e34abf2eb7a17
 
