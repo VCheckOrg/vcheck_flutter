@@ -1,3 +1,7 @@
+## 1.0.34
+
+* iOS plugin update
+
 ## 1.0.33
 
 * Native plugins update
