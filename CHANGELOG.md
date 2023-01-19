@@ -1,3 +1,7 @@
+## 1.0.36
+
+* Android plugin update
+
 ## 1.0.35
 
 * Android plugin update
