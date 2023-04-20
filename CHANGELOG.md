@@ -1,3 +1,7 @@
+## 1.0.41
+
+* Android + IOS plugins update: Providers functionality UI/colorization fixes
+
 ## 1.0.40
 
 * Android + IOS plugins update: Providers functionality added
