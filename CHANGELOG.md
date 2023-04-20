@@ -1,3 +1,7 @@
+## 1.0.40
+
+* Android + IOS plugins update: Providers functionality added
+
 ## 1.0.39
 
 * Android plugin update
