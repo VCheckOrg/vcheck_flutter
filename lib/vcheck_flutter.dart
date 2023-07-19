@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'vcheck_flutter_platform_interface.dart';
 
 //** -------------- Upper-level SDK class
@@ -90,25 +92,13 @@ class FinalVerificationStatus {
   }
 
   bool? get isFinalizedAndSuccessful => _isFinalizedAndSuccessful;
-  set isFinalizedAndSuccessful(bool? isFinalizedAndSuccessful) =>
-      _isFinalizedAndSuccessful = isFinalizedAndSuccessful;
   bool? get isFinalizedAndFailed => _isFinalizedAndFailed;
-  set isFinalizedAndFailed(bool? isFinalizedAndFailed) =>
-      _isFinalizedAndFailed = isFinalizedAndFailed;
   bool? get isWaitingForManualCheck => _isWaitingForManualCheck;
-  set isWaitingForManualCheck(bool? isWaitingForManualCheck) =>
-      _isWaitingForManualCheck = isWaitingForManualCheck;
   String? get status => _status;
-  set status(String? status) => _status = status;
   String? get scheme => _scheme;
-  set scheme(String? scheme) => _scheme = scheme;
   String? get createdAt => _createdAt;
-  set createdAt(String? createdAt) => _createdAt = createdAt;
   String? get finalizedAt => _finalizedAt;
-  set finalizedAt(String? finalizedAt) => _finalizedAt = finalizedAt;
   List<String>? get rejectionReasons => _rejectionReasons;
-  set rejectionReasons(List<String>? rejectionReasons) =>
-      _rejectionReasons = rejectionReasons;
 
   FinalVerificationStatus.fromJson(Map<String, dynamic> json) {
     _isFinalizedAndSuccessful = json['isFinalizedAndSuccessful'];

@@ -1,3 +1,7 @@
+## 1.0.43
+
+* Android + IOS plugins update: Providers functionality fixes and additions
+
 ## 1.0.42
 
 * Android + IOS plugins update: Providers functionality UI/colorization fixes
