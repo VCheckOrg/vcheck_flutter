@@ -1,5 +1,4 @@
 // ignore_for_file: constant_identifier_names
-
 import 'vcheck_flutter_platform_interface.dart';
 
 //** -------------- Upper-level SDK class
