@@ -1,3 +1,7 @@
+## 1.0.44
+
+* Android + IOS plugins update: Minor functionality fixes and additions
+
 ## 1.0.43
 
 * Android + IOS plugins update: Providers functionality fixes and additions
