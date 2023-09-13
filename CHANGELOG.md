@@ -1,3 +1,7 @@
+## 1.0.45
+
+* Android + IOS plugins update: Minor functionality fixes and additions
+
 ## 1.0.44
 
 * Android + IOS plugins update: Minor functionality fixes and additions
