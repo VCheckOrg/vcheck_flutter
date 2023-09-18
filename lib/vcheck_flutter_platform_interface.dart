@@ -29,6 +29,7 @@ abstract class VcheckFlutterPlatform extends PlatformInterface {
       required VerificationSchemeType verificationScheme,
       required String languageCode,
       required Function partnerEndCallback,
+      required Function onVerificationExpired,
       required VCheckEnvironment environment,
       bool? showPartnerLogo,
       bool? showCloseSDKButton,

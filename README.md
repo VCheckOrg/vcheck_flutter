@@ -17,7 +17,7 @@ The native plugins in the package itself use dependencies of [Android](https://j
 #### Add dependency 
 
 ```
-vcheck_flutter: ^1.0.45
+vcheck_flutter: ^1.0.46
 ```
 
 #### Start SDK flow
@@ -32,7 +32,8 @@ VCheckSDK.start(
         verificationScheme: verifScheme,
         languageCode: "en",
         environment: VCheckEnvironment.DEV,
-        partnerEndCallback: partnerEndCallback());
+        partnerEndCallback: partnerEndCallback(),
+        onVerificationExpired: onVerificationExpired());
 ```
 
 
@@ -45,6 +46,7 @@ VCheckSDK.start(
 | languageCode | String | 2-letter language code (Ex.: "en" ; implementation's default is "en") |
 | environment | VCheckEnvironment | VCheck service environment (dev/partner) |
 | partnerEndCallback | Function | Callback function which triggers on verification process and SDK flow finish |
+| onVerificationExpired | Function | Callback function which triggers when current verification goes to expired state |
 
 
 #### Optional properties for verification session's logic and UI customization

@@ -98,6 +98,9 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
             .partnerEndCallback(callback: {
                 self.onVCheckSDKFlowFinish()
             })
+            .onVerificationExpired(callback: {
+                self.onVerificationExpired()
+            })
             .start(partnerAppRW: getOwnRootWindow()!,
                     partnerAppVC: (UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController)!,
                     replaceRootVC: false)
@@ -107,6 +110,15 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
         
         DispatchQueue.main.async {
             self.channel!.invokeMethod("onFinish", arguments: nil, result: {(r:Any?) -> () in
+                print(r.debugDescription);
+            })
+        }
+    }
+
+    private func onVerificationExpired() {
+        
+        DispatchQueue.main.async {
+            self.channel!.invokeMethod("onExpired", arguments: nil, result: {(r:Any?) -> () in
                 print(r.debugDescription);
             })
         }

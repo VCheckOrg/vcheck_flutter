@@ -1,3 +1,7 @@
+## 1.0.46
+
+* Android + IOS plugins update: Updated SDK interface with new callback
+
 ## 1.0.45
 
 * Android + IOS plugins update: Minor functionality fixes and additions

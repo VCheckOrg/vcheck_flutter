@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 import 'vcheck_flutter_platform_interface.dart';
 
-//** -------------- Upper-level SDK class
+//** -------------- Upper-level SDK dev interface class
 
 class VCheckSDK {
   VCheckSDK._privateConstructor();
@@ -13,6 +13,7 @@ class VCheckSDK {
       required VerificationSchemeType verificationScheme,
       required String languageCode,
       required Function partnerEndCallback,
+      required Function onVerificationExpired,
       required VCheckEnvironment environment,
       bool? showPartnerLogo,
       bool? showCloseSDKButton,
@@ -30,6 +31,7 @@ class VCheckSDK {
         languageCode: languageCode,
         environment: environment,
         partnerEndCallback: partnerEndCallback,
+        onVerificationExpired: onVerificationExpired,
         showCloseSDKButton: showCloseSDKButton,
         showPartnerLogo: showPartnerLogo,
         colorActionButtons: colorActionButtons,
@@ -43,7 +45,8 @@ class VCheckSDK {
   }
 }
 
-//** -------------- Domain models
+//** -------------- Deprecated: Final verification status should be
+//** -------------- retrieved by partners' service via VCheck API
 
 class FinalVerificationStatus {
   bool? _isFinalizedAndSuccessful;

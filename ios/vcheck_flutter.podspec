@@ -4,10 +4,10 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'vcheck_flutter'
-  s.version          = '1.2.0'
-  s.summary          = 'A new flutter plugin project.'
+  s.version          = '1.2.1'
+  s.summary          = 'VCheck for Flutter podspec'
   s.description      = <<-DESC
-A new flutter plugin project.
+  VCheck for Flutter podspec.
                        DESC
   s.homepage         = 'http://example.com'
   s.license          = { :file => '../LICENSE' }

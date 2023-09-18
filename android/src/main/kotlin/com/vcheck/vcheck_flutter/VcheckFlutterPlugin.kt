@@ -122,12 +122,18 @@ class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
       .partnerEndCallback {
         onVCheckSDKFlowFinish()
       }
+      .onVerificationExpired {
+        onVerificationExpired()
+      }
       .start(activity)
   }
 
   private fun onVCheckSDKFlowFinish() {
-
       channel.invokeMethod("onFinish", null)
+  }
+
+  private fun onVerificationExpired() {
+      channel.invokeMethod("onExpired", null)
   }
 
   private fun setColorsIfPresent() {

@@ -88,8 +88,8 @@ class _MyAppState extends State<MyApp> {
         verificationScheme: verificationScheme,
         languageCode: "en",
         environment: VCheckEnvironment.DEV,
-        partnerEndCallback: partnerEndCallback());
-
+        partnerEndCallback: partnerEndCallback(),
+        onVerificationExpired: onVerificationExpired());
     if (!mounted) return;
   }
 
@@ -102,6 +102,12 @@ class _MyAppState extends State<MyApp> {
           builder: (BuildContext context) => const ResultWidget(),
         ),
       );
+    };
+  }
+
+  Function onVerificationExpired() {
+    return () {
+      debugPrint("Triggered callback for verification expiration case");
     };
   }
 }
