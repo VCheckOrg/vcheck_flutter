@@ -1,3 +1,7 @@
+## 1.0.51
+
+* Android + IOS plugins update: Platform-specific changes and fixes
+
 ## 1.0.50
 
 * Android + IOS plugins update: Platform-specific changes and fixes
