@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'vcheck_flutter'
-  s.version          = '1.2.8'
+  s.version          = '1.2.9'
   s.summary          = 'VCheck for Flutter podspec'
   s.description      = <<-DESC
   VCheck for Flutter podspec.
