@@ -32,7 +32,7 @@ VCheckSDK.start(
         verificationScheme: verifScheme,
         languageCode: "en",
         environment: VCheckEnvironment.DEV,
-        partnerEndCallback: partnerEndCallback(),
+        partnerEndCallback: onFlutterSDKFlowFinished(),
         onVerificationExpired: onVerificationExpired());
 ```
 
@@ -63,3 +63,4 @@ VCheckSDK.start(
 | colorIcons | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
 | showCloseSDKButton | bool? | Should 'Return to Partner' button be shown |
 | showPartnerLogo | bool? | Should Partner logo be shown |
+
