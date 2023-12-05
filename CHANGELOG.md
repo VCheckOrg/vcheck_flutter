@@ -1,7 +1,8 @@
 
-## 1.1.0
+## 1.4.0
 
 * Major color theme customization + SDK interface changes
+* Sync with actual platform versioning
 
 ## 1.0.56
 

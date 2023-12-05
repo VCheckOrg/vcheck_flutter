@@ -79,7 +79,7 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
             .environment(env: self.environment!)
             .showPartnerLogo(show: self.showPartnerLogo!)
             .showCloseSDKButton(show: self.showCloseSDKButton!)
-            .designConfig(config: self.designConfig)
+            .designConfig(config: self.designConfig!)
             .partnerEndCallback(callback: {
                 self.onVCheckSDKFlowFinish()
             })
