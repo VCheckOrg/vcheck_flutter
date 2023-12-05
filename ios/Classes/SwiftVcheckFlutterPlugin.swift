@@ -17,14 +17,7 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
     private var showPartnerLogo: Bool? = false
     private var showCloseSDKButton: Bool? = true
 
-    private var colorBackgroundTertiary: String? = nil
-    private var colorBackgroundSecondary: String? = nil
-    private var colorBackgroundPrimary: String? = nil
-    private var colorTextSecondary: String? = nil
-    private var colorTextPrimary: String? = nil
-    private var colorBorders: String? = nil
-    private var colorActionButtons: String? = nil
-    private var colorIcons: String? = nil
+    private var designConfig: VCheckDesignConfig? = nil
     
     private var channel: FlutterMethodChannel? = nil
 
@@ -60,14 +53,7 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
         self.showPartnerLogo = arguments["showPartnerLogo"] as? Bool
         self.showCloseSDKButton = arguments["showCloseSDKButton"] as? Bool
 
-        self.colorBackgroundTertiary = arguments["colorBackgroundTertiary"] as? String
-        self.colorBackgroundSecondary = arguments["colorBackgroundSecondary"] as? String
-        self.colorBackgroundPrimary = arguments["colorBackgroundPrimary"] as? String
-        self.colorTextSecondary = arguments["colorTextSecondary"] as? String
-        self.colorTextPrimary = arguments["colorTextPrimary"] as? String
-        self.colorBorders = arguments["colorBorders"] as? String
-        self.colorActionButtons = arguments["colorActionButtons"] as? String
-        self.colorIcons = arguments["colorIcons"] as? String
+        setDesignConfig(designConfigStr: arguments["designConfigStr"] as? String)
 
         if let vs = self.verifScheme {
             print("VCheck_Flutter_iOS : Using \(String(describing: vs.description.uppercased())) verification scheme")
@@ -76,7 +62,7 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
             print("VCheck_Flutter_iOS : Using \(String(describing: env.description.uppercased())) environment")
         }
         if (environment == VCheckEnvironment.DEV) {
-            print("VCheck_Flutter_iOS - Warning: SDK environment is not set or default; using DEV environment by default")
+            print("VCheck_Flutter_iOS : Warning - SDK environment is not set or default; using DEV environment by default")
         }
 
         result("VCheck_Flutter_iOS : iOS SDK start() method called")
@@ -85,9 +71,7 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
     }
 
     private func launchSDK() {
-        
-        self.setColorsIfPresent()
-        
+                
         VCheckSDK.shared
             .verificationToken(token: self.verificationToken!)
             .verificationType(type: self.verifScheme!)
@@ -95,6 +79,7 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
             .environment(env: self.environment!)
             .showPartnerLogo(show: self.showPartnerLogo!)
             .showCloseSDKButton(show: self.showCloseSDKButton!)
+            .designConfig(config: self.designConfig)
             .partnerEndCallback(callback: {
                 self.onVCheckSDKFlowFinish()
             })
@@ -107,7 +92,6 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
     }
     
     private func onVCheckSDKFlowFinish() {
-        
         DispatchQueue.main.async {
             self.channel!.invokeMethod("onFinish", arguments: nil, result: {(r:Any?) -> () in
                 print(r.debugDescription);
@@ -116,7 +100,6 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
     }
 
     private func onVerificationExpired() {
-        
         DispatchQueue.main.async {
             self.channel!.invokeMethod("onExpired", arguments: nil, result: {(r:Any?) -> () in
                 print(r.debugDescription);
@@ -133,34 +116,26 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
     }
     
     public func applicationDidBecomeActive(_ application: UIApplication) {
-        debugPrint("applicationDidBecomeActive")
+        //print("applicationDidBecomeActive")
         self.application = application
     }
-    
-    private func setColorsIfPresent() {
-       if let it = colorActionButtons {
-           VCheckSDK.shared.colorActionButtons(colorHex: it)
-       }
-       if let it = colorBorders {
-         VCheckSDK.shared.colorBorders(colorHex: it)
-       }
-       if let it = colorTextPrimary {
-         VCheckSDK.shared.colorTextPrimary(colorHex: it)
-       }
-       if let it = colorTextSecondary {
-         VCheckSDK.shared.colorTextSecondary(colorHex: it)
-       }
-       if let it = colorBackgroundPrimary {
-         VCheckSDK.shared.colorBackgroundPrimary(colorHex: it)
-       }
-       if let it =  colorBackgroundSecondary {
-         VCheckSDK.shared.colorBackgroundSecondary(colorHex: it)
-       }
-       if let it = colorBackgroundTertiary {
-         VCheckSDK.shared.colorBackgroundTertiary(colorHex: it)
-       }
-        if let it = colorIcons {
-            VCheckSDK.shared.colorIcons(colorHex: it)
+
+    private func setDesignConfig(designConfigStr: String?) {
+        if let possibleJsonData = designConfigStr {
+                
+            if (!possibleJsonData.isEmpty) {
+                if let value = try? JSONDecoder()
+                    .decode(VCheckDesignConfig.self, from: possibleJsonData.data(using: .utf8)!) {
+                    self.designConfig = value
+                } else {
+                    print("Non-valid JSON was passed while initializing "
+                              + "VCheckDesignConfig instance. Persisting VCheck default theme")
+                    self.designConfig = VCheckDesignConfig.getDefaultThemeConfig()
+                }
+            } else {
+                print("No JSON data was passed while initializing "
+                          + "VCheckDesignConfig instance. Persisting VCheck default theme")
+            }
         }
     }
     
@@ -182,19 +157,23 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
     }
 
     public func applicationWillTerminate(_ application: UIApplication) {
-        debugPrint("applicationWillTerminate")
+        //Stub
+        //print("applicationWillTerminate")
     }
 
     public func applicationWillResignActive(_ application: UIApplication) {
-        debugPrint("applicationWillResignActive")
+        //Stub
+        //print("applicationWillResignActive")
     }
 
     public func applicationDidEnterBackground(_ application: UIApplication) {
-        debugPrint("applicationDidEnterBackground")
+        //Stub
+        //print("applicationDidEnterBackground")
     }
 
     public func applicationWillEnterForeground(_ application: UIApplication) {
-        print("applicationWillEnterForeground")
+        //Stub
+        //print("applicationWillEnterForeground")
     }
 }
 

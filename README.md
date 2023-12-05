@@ -17,7 +17,7 @@ The native plugins in the package itself use dependencies of [Android](https://j
 #### Add dependency 
 
 ```
-vcheck_flutter: ^1.0.54
+vcheck_flutter: ^1.1.0
 ```
 
 #### Start SDK flow
@@ -33,7 +33,8 @@ VCheckSDK.start(
         languageCode: "en",
         environment: VCheckEnvironment.DEV,
         partnerEndCallback: onFlutterSDKFlowFinished(),
-        onVerificationExpired: onVerificationExpired());
+        onVerificationExpired: onVerificationExpired()
+        designConfig: designConfig ?? null);
 ```
 
 
@@ -53,14 +54,7 @@ VCheckSDK.start(
 
 | Property | Type | Description |
 | ----------- | ----------- | ----------- |
-| colorBackgroundPrimary | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
-| colorBackgroundSecondary | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
-| colorBackgroundTertiary | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
-| colorActionButtons | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
-| colorTextPrimary | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
-| colorTextSecondary | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
-| colorBorders | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
-| colorIcons | String? | HEX string (ex.: '#2A2A2A' or '#abdbe3') |
+| designConfig | String? | JSON string with specific fixed set of color properties, which can be obtained as a VCheck portal user |
 | showCloseSDKButton | bool? | Should 'Return to Partner' button be shown |
-| showPartnerLogo | bool? | Should Partner logo be shown |
+| showPartnerLogo | bool? | Should VCheck logo be shown |
 

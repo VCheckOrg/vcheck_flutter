@@ -24,23 +24,17 @@ abstract class VcheckFlutterPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  void start(
-      {required String verificationToken,
-      required VerificationSchemeType verificationScheme,
-      required String languageCode,
-      required Function partnerEndCallback,
-      required Function onVerificationExpired,
-      required VCheckEnvironment environment,
-      bool? showPartnerLogo,
-      bool? showCloseSDKButton,
-      String? colorBackgroundTertiary,
-      String? colorBackgroundSecondary,
-      String? colorBackgroundPrimary,
-      String? colorTextSecondary,
-      String? colorTextPrimary,
-      String? colorBorders,
-      String? colorActionButtons,
-      String? colorIcons}) {
+  void start({
+    required String verificationToken,
+    required VerificationSchemeType verificationScheme,
+    required String languageCode,
+    required Function partnerEndCallback,
+    required Function onVerificationExpired,
+    required VCheckEnvironment environment,
+    String? designConfig,
+    bool? showPartnerLogo,
+    bool? showCloseSDKButton,
+  }) {
     throw UnimplementedError('start() has not been implemented.');
   }
 }

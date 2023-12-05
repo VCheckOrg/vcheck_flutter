@@ -1,3 +1,16 @@
+
+## 1.1.0
+
+* Major color theme customization + SDK interface changes
+
+## 1.0.56
+
+* Android + IOS plugins update: Platform-specific changes and fixes
+
+## 1.0.55
+
+* Android + IOS plugins update: Platform-specific changes and fixes
+
 ## 1.0.54
 
 * Android + IOS plugins update: Platform-specific changes and fixes

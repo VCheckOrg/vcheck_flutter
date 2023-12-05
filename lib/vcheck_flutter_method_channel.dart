@@ -17,23 +17,17 @@ class MethodChannelVcheckFlutter extends VcheckFlutterPlatform {
   Function? _expiredAction;
 
   @override
-  void start(
-      {required String verificationToken,
-      required VerificationSchemeType verificationScheme,
-      required String languageCode,
-      required Function partnerEndCallback,
-      required Function onVerificationExpired,
-      required VCheckEnvironment environment,
-      bool? showPartnerLogo,
-      bool? showCloseSDKButton,
-      String? colorBackgroundTertiary,
-      String? colorBackgroundSecondary,
-      String? colorBackgroundPrimary,
-      String? colorTextSecondary,
-      String? colorTextPrimary,
-      String? colorBorders,
-      String? colorActionButtons,
-      String? colorIcons}) async {
+  void start({
+    required String verificationToken,
+    required VerificationSchemeType verificationScheme,
+    required String languageCode,
+    required Function partnerEndCallback,
+    required Function onVerificationExpired,
+    required VCheckEnvironment environment,
+    String? designConfig,
+    bool? showPartnerLogo,
+    bool? showCloseSDKButton,
+  }) async {
     methodChannel.setMethodCallHandler((methodCall) async {
       debugPrint("Caught method call with Dart handler: ${methodCall.method}");
       switch (methodCall.method) {
@@ -53,7 +47,6 @@ class MethodChannelVcheckFlutter extends VcheckFlutterPlatform {
     });
 
     _finishAction = partnerEndCallback;
-
     _expiredAction = onVerificationExpired;
 
     methodChannel.invokeMethod<void>('start', <String, dynamic>{
@@ -61,16 +54,9 @@ class MethodChannelVcheckFlutter extends VcheckFlutterPlatform {
       'verifScheme': verificationScheme.name.toLowerCase(),
       'languageCode': languageCode,
       'environment': environment.name.toLowerCase(),
+      'designConfigStr': designConfig,
       'showPartnerLogo': showPartnerLogo ?? false,
       'showCloseSDKButton': showCloseSDKButton ?? true,
-      'colorBackgroundTertiary': colorBackgroundTertiary,
-      'colorBackgroundSecondary': colorBackgroundSecondary,
-      'colorBackgroundPrimary': colorBackgroundPrimary,
-      'colorTextSecondary': colorTextSecondary,
-      'colorTextPrimary': colorTextPrimary,
-      'colorBorders': colorBorders,
-      'colorActionButtons': colorActionButtons,
-      'colorIcons': colorIcons
     });
   }
 }

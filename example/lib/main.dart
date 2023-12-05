@@ -1,10 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-
 import 'package:vcheck_flutter/vcheck_flutter.dart';
 import 'package:vcheck_flutter_example/result_widget.dart';
 
-//For test env only:
+// You should get verification token from your service provider's side
+// or by contacting VCheck team:
 const String VERIFICATION_TOKEN = 'to-get-from-service';
 
 void main() {
@@ -21,6 +22,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final navigatorKey = GlobalKey<NavigatorState>();
+
+  bool _isDefaultTheme = true;
 
   @override
   void initState() {
@@ -70,7 +73,24 @@ class _MyAppState extends State<MyApp> {
                           verificationScheme:
                               VerificationSchemeType.LIVENESS_CHALLENGE_ONLY);
                     },
-                    child: const Text("Face check"))
+                    child: const Text("Face check")),
+                const SizedBox(width: 0, height: 30),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text("Use default theme"),
+                    const SizedBox(width: 12),
+                    CupertinoSwitch(
+                      activeColor: Colors.blue.shade100,
+                      thumbColor: Colors.blue,
+                      trackColor: Colors.black12,
+                      value: _isDefaultTheme,
+                      onChanged: (value) => setState(() {
+                        _isDefaultTheme = !_isDefaultTheme;
+                      }),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -79,17 +99,27 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
+  // Platform messages are asynchronous, so we initialize SDK in an async method
   Future<void> startSDK(
       {VerificationSchemeType verificationScheme =
           VerificationSchemeType.FULL_CHECK}) async {
+    String designConfig;
+    if (_isDefaultTheme == false) {
+      designConfig = await DefaultAssetBundle.of(context)
+          .loadString("assets/light_test_theme.json");
+    } else {
+      designConfig = await DefaultAssetBundle.of(context)
+          .loadString("assets/default_dark_test_theme.json");
+    }
+
     VCheckSDK.start(
         verificationToken: VERIFICATION_TOKEN,
         verificationScheme: verificationScheme,
         languageCode: "en",
         environment: VCheckEnvironment.DEV,
         partnerEndCallback: partnerEndCallback(),
-        onVerificationExpired: onVerificationExpired());
+        onVerificationExpired: onVerificationExpired(),
+        designConfig: designConfig);
     if (!mounted) return;
   }
 

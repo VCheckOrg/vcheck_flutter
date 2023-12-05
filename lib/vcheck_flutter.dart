@@ -8,40 +8,28 @@ class VCheckSDK {
 
   static final VCheckSDK instance = VCheckSDK._privateConstructor();
 
-  static void start(
-      {required String verificationToken,
-      required VerificationSchemeType verificationScheme,
-      required String languageCode,
-      required Function partnerEndCallback,
-      required Function onVerificationExpired,
-      required VCheckEnvironment environment,
-      bool? showPartnerLogo,
-      bool? showCloseSDKButton,
-      String? colorBackgroundTertiary,
-      String? colorBackgroundSecondary,
-      String? colorBackgroundPrimary,
-      String? colorTextSecondary,
-      String? colorTextPrimary,
-      String? colorBorders,
-      String? colorActionButtons,
-      String? colorIcons}) {
+  static void start({
+    required String verificationToken,
+    required VerificationSchemeType verificationScheme,
+    required String languageCode,
+    required Function partnerEndCallback,
+    required Function onVerificationExpired,
+    required VCheckEnvironment environment,
+    String? designConfig,
+    bool? showPartnerLogo,
+    bool? showCloseSDKButton,
+  }) {
     VcheckFlutterPlatform.instance.start(
-        verificationToken: verificationToken,
-        verificationScheme: verificationScheme,
-        languageCode: languageCode,
-        environment: environment,
-        partnerEndCallback: partnerEndCallback,
-        onVerificationExpired: onVerificationExpired,
-        showCloseSDKButton: showCloseSDKButton,
-        showPartnerLogo: showPartnerLogo,
-        colorActionButtons: colorActionButtons,
-        colorBackgroundPrimary: colorBackgroundPrimary,
-        colorBackgroundSecondary: colorBackgroundSecondary,
-        colorBackgroundTertiary: colorBackgroundTertiary,
-        colorBorders: colorBorders,
-        colorTextPrimary: colorTextPrimary,
-        colorTextSecondary: colorTextSecondary,
-        colorIcons: colorIcons);
+      verificationToken: verificationToken,
+      verificationScheme: verificationScheme,
+      languageCode: languageCode,
+      environment: environment,
+      partnerEndCallback: partnerEndCallback,
+      onVerificationExpired: onVerificationExpired,
+      designConfig: designConfig,
+      showCloseSDKButton: showCloseSDKButton,
+      showPartnerLogo: showPartnerLogo,
+    );
   }
 }
 

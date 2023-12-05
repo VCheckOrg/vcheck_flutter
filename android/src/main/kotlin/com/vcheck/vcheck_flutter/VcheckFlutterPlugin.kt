@@ -7,12 +7,15 @@ import androidx.annotation.NonNull
 import com.vcheck.sdk.core.VCheckSDK
 import com.vcheck.sdk.core.domain.VCheckEnvironment
 import com.vcheck.sdk.core.domain.VerificationSchemeType
+import com.vcheck.sdk.core.domain.VCheckDesignConfig
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
+import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 
 class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
@@ -20,6 +23,7 @@ class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
   private lateinit var context: Context
   private lateinit var activity: Activity
+  private lateinit var channel : MethodChannel
 
   private var verificationToken: String? = null
 
@@ -32,19 +36,7 @@ class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   private var showPartnerLogo: Boolean? = false
   private var showCloseSDKButton: Boolean? = true
 
-  private var colorBackgroundTertiary: String? = null
-  private var colorBackgroundSecondary: String? = null
-  private var colorBackgroundPrimary: String? = null
-  private var colorTextSecondary: String? = null
-  private var colorTextPrimary: String? = null
-  private var colorBorders: String? = null
-  private var colorActionButtons: String? = null
-  private var colorIcons: String? = null
-
-  /// The MethodChannel that does communication between Flutter and native Android
-  /// This local reference serves to register the plugin with the Flutter Engine and unregister it
-  /// when the Flutter Engine is detached from the Activity
-  private lateinit var channel : MethodChannel
+  private var designConfig: VCheckDesignConfig? = null
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
       channel = MethodChannel(flutterPluginBinding.binaryMessenger, "com.vcheck.vcheck_flutter")
@@ -76,14 +68,7 @@ class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
       showPartnerLogo = call.argument("showPartnerLogo")
       showCloseSDKButton = call.argument("showCloseSDKButton")
 
-      colorBackgroundTertiary = call.argument("colorBackgroundTertiary")
-      colorBackgroundSecondary = call.argument("colorBackgroundSecondary")
-      colorBackgroundPrimary = call.argument("colorBackgroundPrimary")
-      colorTextSecondary = call.argument("colorTextSecondary")
-      colorTextPrimary = call.argument("colorTextPrimary")
-      colorBorders = call.argument("colorBorders")
-      colorActionButtons = call.argument("colorActionButtons")
-      colorIcons = call.argument("colorIcons")
+      setDesignConfig(call.argument<String>("designConfigStr"))
 
       if (verifScheme != null) {
           Log.i(TAG, "Using ${verifScheme!!.name.uppercase()} verification scheme")
@@ -110,8 +95,6 @@ class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
   private fun launchSDK(activity: Activity) {
 
-    setColorsIfPresent()
-
     VCheckSDK
       .verificationToken(verificationToken!!)
       .verificationType(verifScheme!!)
@@ -119,6 +102,7 @@ class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
       .environment(environment!!)
       .showPartnerLogo(showPartnerLogo!!)
       .showCloseSDKButton(showCloseSDKButton!!)
+      .designConfig(designConfig!!)
       .partnerEndCallback {
         onVCheckSDKFlowFinish()
       }
@@ -136,41 +120,19 @@ class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
       channel.invokeMethod("onExpired", null)
   }
 
-  private fun setColorsIfPresent() {
-      colorActionButtons?.let {
-        VCheckSDK.colorActionButtons(it)
+  private fun setDesignConfig(possibleJsonData: String?) {
+      if (possibleJsonData != null && possibleJsonData.isNotEmpty()) {
+          try {
+              designConfig = Gson().fromJson(possibleJsonData, VCheckDesignConfig::class.java)
+          } catch (e: JsonSyntaxException) {
+              designConfig = VCheckDesignConfig.getDefaultThemeConfig()
+              Log.i(TAG, "Non-valid JSON was passed while " +
+                      "initializing VCheckDesignConfig instance. Persisting VCheck default theme")
+          }
+      } else {
+          Log.i(TAG, "No JSON data was passed while initializing VCheckDesignConfig instance. " +
+                  "Persisting VCheck default theme")
       }
-      colorBorders?.let {
-        VCheckSDK.colorBorders(it)
-      }
-      colorTextPrimary?.let {
-        VCheckSDK.colorTextPrimary(it)
-      }
-      colorTextSecondary?.let {
-        VCheckSDK.colorTextSecondary(it)
-      }
-      colorBackgroundPrimary?.let {
-        VCheckSDK.colorBackgroundPrimary(it)
-      }
-      colorBackgroundSecondary?.let {
-        VCheckSDK.colorBackgroundSecondary(it)
-      }
-      colorBackgroundTertiary?.let {
-        VCheckSDK.colorBackgroundTertiary(it)
-      }
-      colorIcons?.let {
-          VCheckSDK.colorIcons(it)
-      }
-  }
-
-  override fun onDetachedFromActivityForConfigChanges() {
-    //Stub
-  }
-  override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-    //Stub
-  }
-  override fun onDetachedFromActivity() {
-    //Stub
   }
 
   private fun convertStrToVerifScheme(str: String?): VerificationSchemeType {
@@ -183,5 +145,15 @@ class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
     return VCheckEnvironment.values().first {
       it.name.lowercase() == str
     }
+  }
+
+  override fun onDetachedFromActivityForConfigChanges() {
+    //Stub
+  }
+  override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
+    //Stub
+  }
+  override fun onDetachedFromActivity() {
+    //Stub
   }
 }
