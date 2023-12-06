@@ -1,3 +1,6 @@
+## 1.4.1
+
+* Android platform build fix
 
 ## 1.4.0
 
