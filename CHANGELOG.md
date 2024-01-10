@@ -1,3 +1,7 @@
+## 1.4.2
+
+* Minor platform updates
+
 ## 1.4.1
 
 * Android platform build fix
