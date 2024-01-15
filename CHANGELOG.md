@@ -1,3 +1,7 @@
+## 1.4.4
+
+* Added search for a copy of the document
+
 ## 1.4.3
 
 * Minor platform updates
