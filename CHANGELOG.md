@@ -1,3 +1,7 @@
+## 1.4.5
+
+* Added blinking while passing liveness
+
 ## 1.4.4
 
 * Added search for a copy of the document
