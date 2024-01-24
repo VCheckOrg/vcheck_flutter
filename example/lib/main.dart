@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:vcheck_flutter/vcheck_flutter.dart';
-import 'package:vcheck_flutter_example/result_widget.dart';
+import 'package:vcheck/vcheck.dart';
+import 'package:vcheck_example/result_widget.dart';
 
 // You should get verification token from your service provider's side
 // or by contacting VCheck team:

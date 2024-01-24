@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:vcheck_flutter/vcheck_flutter.dart';
-import 'vcheck_flutter_platform_interface.dart';
+import 'package:vcheck/vcheck.dart';
+import 'vcheck_platform_interface.dart';
 
-const methodChannel = MethodChannel("com.vcheck.vcheck_flutter");
+const methodChannel = MethodChannel("com.sdk.vcheck");
 
 const onFinishMethodName = "onFinish";
 const onExpiredMethodName = "onExpired";
 
-/// An implementation of [VcheckFlutterPlatform] that uses method channels.
-class MethodChannelVcheckFlutter extends VcheckFlutterPlatform {
+/// An implementation of [VcheckPlatform] that uses method channels.
+class MethodChannelVcheck extends VcheckPlatform {
   /// The method channel used to interact with the native platform.
 
   Function? _finishAction;

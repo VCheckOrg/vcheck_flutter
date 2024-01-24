@@ -43,7 +43,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.vcheck.vcheck_flutter_example"
+        applicationId "com.sdk.vcheck_example"
 
         minSdkVersion 21
         targetSdkVersion 33

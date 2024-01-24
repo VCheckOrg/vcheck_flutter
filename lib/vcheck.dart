@@ -1,5 +1,5 @@
 // ignore_for_file: constant_identifier_names
-import 'vcheck_flutter_platform_interface.dart';
+import 'vcheck_platform_interface.dart';
 
 //** -------------- Upper-level SDK dev interface class
 
@@ -19,7 +19,7 @@ class VCheckSDK {
     bool? showPartnerLogo,
     bool? showCloseSDKButton,
   }) {
-    VcheckFlutterPlatform.instance.start(
+    VcheckPlatform.instance.start(
       verificationToken: verificationToken,
       verificationScheme: verificationScheme,
       languageCode: languageCode,

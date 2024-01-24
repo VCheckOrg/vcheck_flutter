@@ -2,7 +2,7 @@ import Flutter
 import UIKit
 import VCheckSDK
 
-public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicationLifeCycleDelegate {
+public class SwiftVcheckPlugin: NSObject, FlutterPlugin, FlutterApplicationLifeCycleDelegate {
 
     private var application: UIApplication? = nil
 
@@ -22,8 +22,8 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
     private var channel: FlutterMethodChannel? = nil
 
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let channel = FlutterMethodChannel(name: "com.vcheck.vcheck_flutter", binaryMessenger: registrar.messenger())
-        let instance = SwiftVcheckFlutterPlugin()
+        let channel = FlutterMethodChannel(name: "com.sdk.vcheck", binaryMessenger: registrar.messenger())
+        let instance = SwiftVcheckPlugin()
         instance.channel = channel
         registrar.addMethodCallDelegate(instance, channel: instance.channel!)
         registrar.addApplicationDelegate(instance)
@@ -56,16 +56,16 @@ public class SwiftVcheckFlutterPlugin: NSObject, FlutterPlugin, FlutterApplicati
         setDesignConfig(designConfigStr: arguments["designConfigStr"] as? String)
 
         if let vs = self.verifScheme {
-            print("VCheck_Flutter_iOS : Using \(String(describing: vs.description.uppercased())) verification scheme")
+            print("VCheck_iOS : Using \(String(describing: vs.description.uppercased())) verification scheme")
         }
         if let env = self.environment {
-            print("VCheck_Flutter_iOS : Using \(String(describing: env.description.uppercased())) environment")
+            print("VCheck_iOS : Using \(String(describing: env.description.uppercased())) environment")
         }
         if (environment == VCheckEnvironment.DEV) {
-            print("VCheck_Flutter_iOS : Warning - SDK environment is not set or default; using DEV environment by default")
+            print("VCheck_iOS : Warning - SDK environment is not set or default; using DEV environment by default")
         }
 
-        result("VCheck_Flutter_iOS : iOS SDK start() method called")
+        result("VCheck_iOS : iOS SDK start() method called")
         
         self.launchSDK()
     }

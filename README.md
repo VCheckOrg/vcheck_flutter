@@ -17,13 +17,13 @@ The native plugins in the package itself use dependencies of [Android](https://j
 #### Add dependency 
 
 ```
-vcheck_flutter: ^1.4.5
+vcheck: ^1.4.5
 ```
 
 #### Start SDK flow
 
 ```
-import 'package:vcheck_flutter_test/vcheck_flutter.dart';
+import 'package:vcheck_test/vcheck.dart';
 
 //...
 

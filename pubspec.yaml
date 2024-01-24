@@ -1,4 +1,4 @@
-name: vcheck_flutter
+name: vcheck
 description: VCheck SDK for Flutter
 version: 1.4.5
 homepage: https://vycheck.com/
@@ -26,7 +26,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.vcheck.vcheck_flutter
-        pluginClass: VcheckFlutterPlugin
+        package: com.sdk.vcheck
+        pluginClass: VcheckPlugin
       ios:
-        pluginClass: VcheckFlutterPlugin
+        pluginClass: VcheckPlugin

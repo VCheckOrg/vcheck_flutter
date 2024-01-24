@@ -1,4 +1,4 @@
-package com.vcheck.vcheck_flutter
+package com.sdk.vcheck
 
 import android.app.Activity
 import android.content.Context
@@ -17,9 +17,9 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 
-class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
+class VcheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
-  private val TAG = "VCheck_Flutter_Android"
+  private val TAG = "VCheck_Android"
 
   private lateinit var context: Context
   private lateinit var activity: Activity
@@ -39,7 +39,7 @@ class VcheckFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   private var designConfig: VCheckDesignConfig? = null
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-      channel = MethodChannel(flutterPluginBinding.binaryMessenger, "com.vcheck.vcheck_flutter")
+      channel = MethodChannel(flutterPluginBinding.binaryMessenger, "com.sdk.vcheck")
       channel.setMethodCallHandler(this)
       context = flutterPluginBinding.applicationContext
   }

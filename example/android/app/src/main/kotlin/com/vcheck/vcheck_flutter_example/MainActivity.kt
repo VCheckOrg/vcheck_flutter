@@ -1,4 +1,4 @@
-package com.vcheck.vcheck_flutter_example
+package com.sdk.vcheck_example
 
 import io.flutter.embedding.android.FlutterActivity
 

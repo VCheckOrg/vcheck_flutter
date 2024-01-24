@@ -1,4 +1,4 @@
-group 'com.vcheck.vcheck_flutter'
+group 'com.sdk.vcheck'
 version '1.0-SNAPSHOT'
 
 buildscript {

@@ -1,25 +1,25 @@
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-import 'package:vcheck_flutter/vcheck_flutter.dart';
+import 'package:vcheck/vcheck.dart';
 
-import 'vcheck_flutter_method_channel.dart';
+import 'vcheck_method_channel.dart';
 
-abstract class VcheckFlutterPlatform extends PlatformInterface {
-  /// Constructs a VcheckFlutterTestPlatform.
-  VcheckFlutterPlatform() : super(token: _token);
+abstract class VcheckPlatform extends PlatformInterface {
+  /// Constructs a VcheckTestPlatform.
+  VcheckPlatform() : super(token: _token);
 
   static final Object _token = Object();
 
-  static VcheckFlutterPlatform _instance = MethodChannelVcheckFlutter();
+  static VcheckPlatform _instance = MethodChannelVcheck();
 
-  /// The default instance of [VcheckFlutterPlatform] to use.
+  /// The default instance of [VcheckPlatform] to use.
   ///
-  /// Defaults to [MethodChannelVcheckFlutter].
-  static VcheckFlutterPlatform get instance => _instance;
+  /// Defaults to [MethodChannelVcheck].
+  static VcheckPlatform get instance => _instance;
 
   /// Platform-specific implementations should set this with their own
-  /// platform-specific class that extends [VcheckFlutterPlatform] when
+  /// platform-specific class that extends [VcheckPlatform] when
   /// they register themselves.
-  static set instance(VcheckFlutterPlatform instance) {
+  static set instance(VcheckPlatform instance) {
     PlatformInterface.verifyToken(instance, _token);
     _instance = instance;
   }

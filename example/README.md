@@ -1,6 +1,6 @@
-# vcheck_flutter_example
+# vcheck_example
 
-Demonstrates how to use the vcheck_flutter plugin.
+Demonstrates how to use the vcheck plugin.
 
 ## Getting Started
 

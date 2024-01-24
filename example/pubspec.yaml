@@ -1,5 +1,5 @@
-name: vcheck_flutter_example
-description: Demonstrates how to use the vcheck_flutter plugin.
+name: vcheck_example
+description: Demonstrates how to use the vcheck plugin.
 
 publish_to: 'none'
 
@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  vcheck_flutter:
+  vcheck:
     path: ../
     
   cupertino_icons: ^1.0.2
