@@ -1,3 +1,7 @@
+## 1.4.8
+
+* Changed the actions variation for the liveness
+
 ## 1.4.5
 
 * Added blinking while passing liveness

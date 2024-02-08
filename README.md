@@ -17,7 +17,7 @@ The native plugins in the package itself use dependencies of [Android](https://j
 #### Add dependency 
 
 ```
-vcheck: ^1.4.5
+vcheck: ^1.4.8
 ```
 
 #### Start SDK flow

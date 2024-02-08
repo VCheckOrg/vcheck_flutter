@@ -1,6 +1,6 @@
 name: vcheck
 description: VCheck SDK for Flutter
-version: 1.4.5
+version: 1.4.8
 homepage: https://vycheck.com/
 
 environment:
